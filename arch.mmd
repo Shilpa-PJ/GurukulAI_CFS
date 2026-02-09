@@ -1,0 +1,54 @@
+flowchart TD
+
+    %% User Entry
+    User[User]
+    API[FastAPI Gateway]
+
+    %% Core Intelligence
+    Guardrails[Input & Access Guardrails]
+    Planner[LLM Planner / Orchestrator]
+    LLM[LLM Core]
+
+    %% Tooling Layer
+    MCP[MCP Server]
+    DB[(Banking Database)]
+
+    %% RAG & Insights
+    RAG[RAG Service]
+    VectorDB[(Vector Store)]
+    InsightEngine[Insight Engine]
+
+    %% Response
+    Response[Final Response]
+
+    %% User Flow
+    User --> API
+    API --> Guardrails
+    Guardrails --> Planner
+
+    %% Planner Decisions
+    Planner --> MCP
+    Planner --> RAG
+    Planner --> InsightEngine
+
+    %% MCP Tool Execution
+    MCP --> DB
+    DB --> MCP
+    MCP --> Planner
+
+    %% RAG Retrieval
+    RAG --> VectorDB
+    VectorDB --> RAG
+    RAG --> Planner
+
+    %% Insight Generation
+    InsightEngine --> Planner
+
+    %% LLM Invocation
+    Planner --> LLM
+    LLM --> Planner
+
+    %% Final Output
+    Planner --> Response
+    Response --> API
+    API --> User
