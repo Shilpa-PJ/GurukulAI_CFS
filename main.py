@@ -4,8 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.responses import FileResponse
 from langchain_ollama import OllamaLLM
-# RAG is now used inside agent.py, not here
-# from rag_service import get_rag_context
+
 
 from planner import plan_tool_call
 #from mcp_client import call_mcp_tool
